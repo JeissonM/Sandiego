@@ -143,28 +143,28 @@ class GradoController extends Controller
     public function destroy($id)
     {
         $grado = Grado::find($id);
-        /*if (count($grado->paginas) > 0 || count($grado->modulos) > 0 || count($grado->users) > 0) {
-            flash("El Grupo de usuario <strong>" . $grado->nombre . "</strong> no pudo ser eliminado porque tiene permisos o datos-basicos asociados.")->warning();
-            return redirect()->route('Grado.index');
-        } else {*/
-        $result = $grado->delete();
-        if ($result) {
-            $aud = new Auditoriadatosgenerales();
-            $u = Auth::user();
-            $aud->usuario = "ID: " . $u->identificacion . ",  USUARIO: " . $u->nombres . " " . $u->apellidos;
-            $aud->operacion = "ELIMINAR";
-            $str = "ELIMINACIÓN DE GRADOS. DATOS ELIMINADOS: ";
-            foreach ($grado->attributesToArray() as $key => $value) {
-                $str = $str . ", " . $key . ": " . $value;
-            }
-            $aud->detalles = $str;
-            $aud->save();
-            flash("El grado <strong>" . $grado->grado . "</strong> fue eliminado de forma exitosa!")->success();
+        if (count($grado->grupos) > 0) {
+            flash("El grado <strong>" . $grado->grado . "</strong> no pudo ser eliminado porque tiene grupos o cursos asociados.")->warning();
             return redirect()->route('grado.index');
         } else {
-            flash("El grado <strong>" . $grado->grado . "</strong> no pudo ser eliminado. Error: " . $result)->error();
-            return redirect()->route('grado.index');
+            $result = $grado->delete();
+            if ($result) {
+                $aud = new Auditoriadatosgenerales();
+                $u = Auth::user();
+                $aud->usuario = "ID: " . $u->identificacion . ",  USUARIO: " . $u->nombres . " " . $u->apellidos;
+                $aud->operacion = "ELIMINAR";
+                $str = "ELIMINACIÓN DE GRADOS. DATOS ELIMINADOS: ";
+                foreach ($grado->attributesToArray() as $key => $value) {
+                    $str = $str . ", " . $key . ": " . $value;
+                }
+                $aud->detalles = $str;
+                $aud->save();
+                flash("El grado <strong>" . $grado->grado . "</strong> fue eliminado de forma exitosa!")->success();
+                return redirect()->route('grado.index');
+            } else {
+                flash("El grado <strong>" . $grado->grado . "</strong> no pudo ser eliminado. Error: " . $result)->error();
+                return redirect()->route('grado.index');
+            }
         }
-        //}
     }
 }

@@ -2392,6 +2392,27 @@ table th[class*="col-"] {
 .table-hover > tbody > tr.info:hover > th {
   background-color: #c4e3f3;
 }
+.table > thead > tr > td.personal,
+.table > tbody > tr > td.personal,
+.table > tfoot > tr > td.personal,
+.table > thead > tr > th.personal,
+.table > tbody > tr > th.personal,
+.table > tfoot > tr > th.personal,
+.table > thead > tr.personal > td,
+.table > tbody > tr.personal > td,
+.table > tfoot > tr.personal > td,
+.table > thead > tr.personal > th,
+.table > tbody > tr.personal > th,
+.table > tfoot > tr.personal > th {
+  background-color: #fbe3ec;
+}
+.table-hover > tbody > tr > td.personal:hover,
+.table-hover > tbody > tr > th.personal:hover,
+.table-hover > tbody > tr.personal:hover > td,
+.table-hover > tbody > tr:hover > .personal,
+.table-hover > tbody > tr.personal:hover > th {
+  background-color: #fbe3ec;
+}
 .table > thead > tr > td.warning,
 .table > tbody > tr > td.warning,
 .table > tfoot > tr > td.warning,

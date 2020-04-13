@@ -3,8 +3,8 @@
 @section('breadcrumb')
 <li><a href="{{ route('inicio') }}">Inicio</a></li>
 <li><a href="{{ route('menu.datos_basicos') }}">Datos Generales</a></li>
-<li><a href="{{ route('estadocivil.index') }}">Estados Civiles</a></li>
-<li class="active">Crear</li>
+<li><a href="{{ route('regimen.index') }}">Regímenes</a></li>
+<li class="active">Editar</li>
 @endsection
 
 @section('content')
@@ -13,22 +13,23 @@
     @endcomponent
 </div>
 <div class="row-one">
-    <h3 class="title1" style="color: #287094 !important;">Crear Estado Civil</h3>
+    <h3 class="title1" style="color: #287094 !important;">Editar Régimen</h3>
     <div class="well">
-        <a href="{{route('estadocivil.index')}}" class="btn btn-primary"><i class="fa fa-reply-o"></i> Volver</a>
+        <a href="{{route('regimen.index')}}" class="btn btn-primary"><i class="fa fa-reply-o"></i> Volver</a>
         <a class="btn btn-default" data-toggle="modal" data-target="#gridSystemModal"><i class="fa fa-question"></i> Ayuda</a>
     </div>
     <div class="form-grids row widget-shadow" data-example-id="basic-forms">
         <div class="form-title">
-            <h4>Datos del Estado Civil</h4>
+            <h4>Datos del Régimen</h4>
         </div>
         <div class="form-body">
-            <form class="form" role='form' method="POST" action="{{route('estadocivil.store')}}">
+            <form class="form" role='form' method="POST" action="{{route('regimen.update',$regimen->id)}}">
                 @csrf
+                <input name="_method" type="hidden" value="PUT" />
                 <div class="form-group">
                     <div class="col-md-12">
                         <label for="exampleInputEmail1">Descripción*</label>
-                        <input class="form-control" type="text" required="required" name="descripcion">
+                        <input class="form-control" value="{{$regimen->descripcion}}" type="text" required="required" name="descripcion">
                     </div>
                 </div>
                 <div class="form-group">
@@ -51,7 +52,7 @@
             <div class="modal-body">
                 <div class="row">
                     <div class="alert alert-default" role="alert" style="text-align: justify;">
-                        <p>Agregue nuevos estados para uso en personas naturales.</p>
+                        <p>Edite los datos de los regímenes, los regímenes son para uso en personas jurídicas o entes de control.</p>
                     </div>
                 </div>
             </div>
@@ -66,6 +67,7 @@
 @section('script')
 <script type="text/javascript">
     $(document).ready(function() {
+        $('#example1').DataTable();
         $('.select2').select2();
     });
 </script>

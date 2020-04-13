@@ -3,14 +3,14 @@
 @section('breadcrumb')
 <li><a href="{{ route('inicio') }}">Inicio</a></li>
 <li><a href="{{ route('menu.datos_basicos') }}">Datos Generales</a></li>
-<li class="active">Estado Civil</li>
+<li class="active">Tipos de Documentos</li>
 @endsection
 
 @section('content')
 <div class="row-one">
-    <h3 class="title1" style="color: #287094 !important;">Estados Civiles</h3>
+    <h3 class="title1" style="color: #287094 !important;">Tipos de Documentos</h3>
     <div class="well">
-        <a href="{{route('estadocivil.create')}}" class="btn btn-primary"><i class="fa fa-plus"></i> Crear Nuevo</a>
+        <a href="{{route('tipodoc.create')}}" class="btn btn-primary"><i class="fa fa-plus"></i> Crear Nuevo</a>
         <a class="btn btn-default" data-toggle="modal" data-target="#gridSystemModal"><i class="fa fa-question"></i> Ayuda</a>
     </div>
     <div class="panel-info widget-shadow">
@@ -19,22 +19,22 @@
                 <thead>
                     <tr class="info">
                         <th>ID</th>
-                        <th>ESTADO CIVIL</th>
+                        <th>TIPO DOCUMENTO</th>
                         <th>CREADO</th>
                         <th>MODIFICADO</th>
                         <th>ACCIONES</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($estados as $m)
+                    @foreach($tipodocs as $m)
                     <tr>
                         <td>{{$m->id}}</td>
-                        <td>{{$m->descripcion}}</td>
+                        <td>{{$m->abreviatura." - ".$m->descripcion}}</td>
                         <td>{{$m->created_at}}</td>
                         <td>{{$m->updated_at}}</td>
                         <td>
-                            <a href="{{route('estadocivil.edit',$m->id)}}" data-toggle="tooltip" title="Editar Estado" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i></a>
-                            <a href="{{route('estadocivil.delete',$m->id)}}" data-toggle="tooltip" title="Eliminar Estado" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i></a>
+                            <a href="{{route('tipodoc.edit',$m->id)}}" data-toggle="tooltip" title="Editar Tipo Documento" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i></a>
+                            <a href="{{route('tipodoc.delete',$m->id)}}" data-toggle="tooltip" title="Eliminar Tipo Documento" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i></a>
                         </td>
                     </tr>
                     @endforeach
@@ -54,7 +54,7 @@
             <div class="modal-body">
                 <div class="row">
                     <div class="alert alert-default" role="alert" style="text-align: justify;">
-                        <p>Esta funcionalidad permite la gestión de los estados civiles para uso en personas naturales.</p>
+                        <p>Esta funcionalidad permite la gestión de los Tipos de Documentos necesarios para la gestión de personas naturales y jurídicas.</p>
                     </div>
                 </div>
             </div>

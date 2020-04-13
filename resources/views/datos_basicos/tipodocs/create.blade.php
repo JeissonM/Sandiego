@@ -3,7 +3,7 @@
 @section('breadcrumb')
 <li><a href="{{ route('inicio') }}">Inicio</a></li>
 <li><a href="{{ route('menu.datos_basicos') }}">Datos Generales</a></li>
-<li><a href="{{ route('estadocivil.index') }}">Estados Civiles</a></li>
+<li><a href="{{ route('tipodoc.index') }}">Tipos de Documentos</a></li>
 <li class="active">Crear</li>
 @endsection
 
@@ -13,22 +13,26 @@
     @endcomponent
 </div>
 <div class="row-one">
-    <h3 class="title1" style="color: #287094 !important;">Crear Estado Civil</h3>
+    <h3 class="title1" style="color: #287094 !important;">Crear Tipo de Documento</h3>
     <div class="well">
-        <a href="{{route('estadocivil.index')}}" class="btn btn-primary"><i class="fa fa-reply-o"></i> Volver</a>
+        <a href="{{route('tipodoc.index')}}" class="btn btn-primary"><i class="fa fa-reply-o"></i> Volver</a>
         <a class="btn btn-default" data-toggle="modal" data-target="#gridSystemModal"><i class="fa fa-question"></i> Ayuda</a>
     </div>
     <div class="form-grids row widget-shadow" data-example-id="basic-forms">
         <div class="form-title">
-            <h4>Datos del Estado Civil</h4>
+            <h4>Datos del Tipo de Documento</h4>
         </div>
         <div class="form-body">
-            <form class="form" role='form' method="POST" action="{{route('estadocivil.store')}}">
+            <form class="form" role='form' method="POST" action="{{route('tipodoc.store')}}">
                 @csrf
                 <div class="form-group">
-                    <div class="col-md-12">
-                        <label for="exampleInputEmail1">Descripción*</label>
+                    <div class="col-md-6">
+                        <label for="exampleInputEmail1">Descripción del Tipo de Documento*</label>
                         <input class="form-control" type="text" required="required" name="descripcion">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="exampleInputEmail1">Abreviatura</label>
+                        <input class="form-control" type="text" name="abreviatura">
                     </div>
                 </div>
                 <div class="form-group">
@@ -51,7 +55,7 @@
             <div class="modal-body">
                 <div class="row">
                     <div class="alert alert-default" role="alert" style="text-align: justify;">
-                        <p>Agregue nuevos estados para uso en personas naturales.</p>
+                        <p>Agregue nuevos Tipos de Documentos, los Tipos de Documentos son necesarios para la gestión de personas naturales y jurídicas.</p>
                     </div>
                 </div>
             </div>

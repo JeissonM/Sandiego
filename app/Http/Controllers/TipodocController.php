@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\PeriodoRequest;
+use App\Http\Requests\TipodocRequest;
 use App\Models\Auditoria\Auditoriadatosgenerales;
-use App\Models\Datosgenerales\Periodo;
+use App\Models\Datosgenerales\Tipodoc;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class PeriodoController extends Controller
+class TipodocController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,10 +17,10 @@ class PeriodoController extends Controller
      */
     public function index()
     {
-        $periodos = Periodo::all()->sortBy('created_at');
-        return view('datos_basicos.periodos.list')
+        $tipodocs = Tipodoc::all()->sortBy('created_at');
+        return view('datos_basicos.tipodocs.list')
             ->with('location', 'datos-basicos')
-            ->with('periodos', $periodos);
+            ->with('tipodocs', $tipodocs);
     }
 
     /**
@@ -30,7 +30,7 @@ class PeriodoController extends Controller
      */
     public function create()
     {
-        return view('datos_basicos.periodos.create')
+        return view('datos_basicos.tipodocs.create')
             ->with('location', 'datos-basicos');
     }
 
@@ -40,29 +40,29 @@ class PeriodoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(PeriodoRequest $request)
+    public function store(TipodocRequest $request)
     {
-        $periodo = new Periodo($request->all());
-        foreach ($periodo->attributesToArray() as $key => $value) {
-            $periodo->$key = strtoupper($value);
+        $tipodoc = new Tipodoc($request->all());
+        foreach ($tipodoc->attributesToArray() as $key => $value) {
+            $tipodoc->$key = strtoupper($value);
         }
         $u = Auth::user();
-        $result = $periodo->save();
+        $result = $tipodoc->save();
         if ($result) {
             $aud = new Auditoriadatosgenerales();
             $aud->usuario = "ID: " . $u->identificacion . ",  USUARIO: " . $u->nombres . " " . $u->apellidos;
             $aud->operacion = "INSERTAR";
-            $str = "CREACIÓN DE PERIODO. DATOS: ";
-            foreach ($periodo->attributesToArray() as $key => $value) {
+            $str = "CREACIÓN DE TIPO DE DOCUMENTO. DATOS: ";
+            foreach ($tipodoc->attributesToArray() as $key => $value) {
                 $str = $str . ", " . $key . ": " . $value;
             }
             $aud->detalles = $str;
             $aud->save();
-            flash("El período <strong>" . $periodo->periodo . "</strong> fue almacenado de forma exitosa!")->success();
-            return redirect()->route('periodo.index');
+            flash("El tipo de documento <strong>" . $tipodoc->descripcion . "</strong> fue almacenado de forma exitosa!")->success();
+            return redirect()->route('tipodoc.index');
         } else {
-            flash("El período <strong>" . $periodo->periodo . "</strong> no pudo ser almacenado. Error: " . $result)->error();
-            return redirect()->route('periodo.index');
+            flash("El tipo de documento <strong>" . $tipodoc->descripcion . "</strong> no pudo ser almacenado. Error: " . $result)->error();
+            return redirect()->route('tipodoc.index');
         }
     }
 
@@ -74,10 +74,10 @@ class PeriodoController extends Controller
      */
     public function show($id)
     {
-        /*$periodo = Periodo::find($id);
-        return view('datos-basicos.periodos.show')
+        /*$tipodoc = Tipodoc::find($id);
+        return view('datos-basicos.tipodocs.show')
             ->with('location', 'datos-basicos')
-            ->with('periodo', $periodo);*/
+            ->with('Tipodoc', $tipodoc);*/
     }
 
     /**
@@ -88,10 +88,10 @@ class PeriodoController extends Controller
      */
     public function edit($id)
     {
-        $periodo = Periodo::find($id);
-        return view('datos_basicos.periodos.edit')
+        $tipodoc = Tipodoc::find($id);
+        return view('datos_basicos.tipodocs.edit')
             ->with('location', 'datos-basicos')
-            ->with('periodo', $periodo);
+            ->with('tipodoc', $tipodoc);
     }
 
     /**
@@ -103,34 +103,34 @@ class PeriodoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $periodo = Periodo::find($id);
-        $m = new Periodo($periodo->attributesToArray());
-        foreach ($periodo->attributesToArray() as $key => $value) {
+        $tipodoc = Tipodoc::find($id);
+        $m = new Tipodoc($tipodoc->attributesToArray());
+        foreach ($tipodoc->attributesToArray() as $key => $value) {
             if (isset($request->$key)) {
-                $periodo->$key = strtoupper($request->$key);
+                $tipodoc->$key = strtoupper($request->$key);
             }
         }
         $u = Auth::user();
-        $result = $periodo->save();
+        $result = $tipodoc->save();
         if ($result) {
             $aud = new Auditoriadatosgenerales();
             $aud->usuario = "ID: " . $u->identificacion . ",  USUARIO: " . $u->nombres . " " . $u->apellidos;
             $aud->operacion = "ACTUALIZAR DATOS";
-            $str = "EDICION DE PERIODO. DATOS NUEVOS: ";
+            $str = "EDICION DE TIPOS DE DOCUMENTOS. DATOS NUEVOS: ";
             $str2 = " DATOS ANTIGUOS: ";
             foreach ($m->attributesToArray() as $key => $value) {
                 $str2 = $str2 . ", " . $key . ": " . $value;
             }
-            foreach ($periodo->attributesToArray() as $key => $value) {
+            foreach ($tipodoc->attributesToArray() as $key => $value) {
                 $str = $str . ", " . $key . ": " . $value;
             }
             $aud->detalles = $str . " - " . $str2;
             $aud->save();
-            flash("El período <strong>" . $periodo->periodo . "</strong> fue modificado de forma exitosa!")->success();
-            return redirect()->route('periodo.index');
+            flash("El tipo de documento <strong>" . $tipodoc->descripcion . "</strong> fue modificado de forma exitosa!")->success();
+            return redirect()->route('tipodoc.index');
         } else {
-            flash("El período <strong>" . $periodo->periodo . "</strong> no pudo ser modificado. Error: " . $result)->error();
-            return redirect()->route('periodo.index');
+            flash("El tipo de documento <strong>" . $tipodoc->descripcion . "</strong> no pudo ser modificado. Error: " . $result)->error();
+            return redirect()->route('tipodoc.index');
         }
     }
 
@@ -142,28 +142,28 @@ class PeriodoController extends Controller
      */
     public function destroy($id)
     {
-        $periodo = Periodo::find($id);
-        if (count($periodo->grupos) > 0) {
-            flash("El período <strong>" . $periodo->periodo . "</strong> no pudo ser eliminado porque tiene grupos o cursos asociados.")->warning();
-            return redirect()->route('periodo.index');
+        $tipodoc = Tipodoc::find($id);
+        if (count($tipodoc->personanaturals) > 0) {
+            flash("El tipo de documento <strong>" . $tipodoc->descripcion . "</strong> no pudo ser eliminado porque tiene personas asociadas.")->warning();
+            return redirect()->route('tipodoc.index');
         } else {
-            $result = $periodo->delete();
+            $result = $tipodoc->delete();
             if ($result) {
                 $aud = new Auditoriadatosgenerales();
                 $u = Auth::user();
                 $aud->usuario = "ID: " . $u->identificacion . ",  USUARIO: " . $u->nombres . " " . $u->apellidos;
                 $aud->operacion = "ELIMINAR";
-                $str = "ELIMINACIÓN DE PERIODOS. DATOS ELIMINADOS: ";
-                foreach ($periodo->attributesToArray() as $key => $value) {
+                $str = "ELIMINACIÓN DE TIPO DE DOCUMENTO. DATOS ELIMINADOS: ";
+                foreach ($tipodoc->attributesToArray() as $key => $value) {
                     $str = $str . ", " . $key . ": " . $value;
                 }
                 $aud->detalles = $str;
                 $aud->save();
-                flash("El período <strong>" . $periodo->periodo . "</strong> fue eliminado de forma exitosa!")->success();
-                return redirect()->route('periodo.index');
+                flash("El tipo de documento <strong>" . $tipodoc->descripcion . "</strong> fue eliminado de forma exitosa!")->success();
+                return redirect()->route('tipodoc.index');
             } else {
-                flash("El período <strong>" . $periodo->periodo . "</strong> no pudo ser eliminado. Error: " . $result)->error();
-                return redirect()->route('periodo.index');
+                flash("El tipo de documento <strong>" . $tipodoc->descripcion . "</strong> no pudo ser eliminado. Error: " . $result)->error();
+                return redirect()->route('tipodoc.index');
             }
         }
     }

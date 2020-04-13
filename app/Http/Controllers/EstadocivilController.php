@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\PeriodoRequest;
+use App\Http\Requests\EstadocivilRequest;
 use App\Models\Auditoria\Auditoriadatosgenerales;
-use App\Models\Datosgenerales\Periodo;
+use App\Models\Datosgenerales\Estadocivil;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class PeriodoController extends Controller
+class EstadocivilController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,10 +17,10 @@ class PeriodoController extends Controller
      */
     public function index()
     {
-        $periodos = Periodo::all()->sortBy('created_at');
-        return view('datos_basicos.periodos.list')
+        $estados = Estadocivil::all();
+        return view('datos_basicos.estadocivil.list')
             ->with('location', 'datos-basicos')
-            ->with('periodos', $periodos);
+            ->with('estados', $estados);
     }
 
     /**
@@ -30,7 +30,7 @@ class PeriodoController extends Controller
      */
     public function create()
     {
-        return view('datos_basicos.periodos.create')
+        return view('datos_basicos.estadocivil.create')
             ->with('location', 'datos-basicos');
     }
 
@@ -40,29 +40,29 @@ class PeriodoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(PeriodoRequest $request)
+    public function store(EstadocivilRequest $request)
     {
-        $periodo = new Periodo($request->all());
-        foreach ($periodo->attributesToArray() as $key => $value) {
-            $periodo->$key = strtoupper($value);
+        $estado = new Estadocivil($request->all());
+        foreach ($estado->attributesToArray() as $key => $value) {
+            $estado->$key = strtoupper($value);
         }
         $u = Auth::user();
-        $result = $periodo->save();
+        $result = $estado->save();
         if ($result) {
             $aud = new Auditoriadatosgenerales();
             $aud->usuario = "ID: " . $u->identificacion . ",  USUARIO: " . $u->nombres . " " . $u->apellidos;
             $aud->operacion = "INSERTAR";
-            $str = "CREACIÓN DE PERIODO. DATOS: ";
-            foreach ($periodo->attributesToArray() as $key => $value) {
+            $str = "CREACIÓN DE ESTADO CIVIL. DATOS: ";
+            foreach ($estado->attributesToArray() as $key => $value) {
                 $str = $str . ", " . $key . ": " . $value;
             }
             $aud->detalles = $str;
             $aud->save();
-            flash("El período <strong>" . $periodo->periodo . "</strong> fue almacenado de forma exitosa!")->success();
-            return redirect()->route('periodo.index');
+            flash("El estado civil <strong>" . $estado->descripcion . "</strong> fue almacenado de forma exitosa!")->success();
+            return redirect()->route('estadocivil.index');
         } else {
-            flash("El período <strong>" . $periodo->periodo . "</strong> no pudo ser almacenado. Error: " . $result)->error();
-            return redirect()->route('periodo.index');
+            flash("El Estadocivil <strong>" . $estado->descripcion . "</strong> no pudo ser almacenado. Error: " . $result)->error();
+            return redirect()->route('estadocivil.index');
         }
     }
 
@@ -74,10 +74,10 @@ class PeriodoController extends Controller
      */
     public function show($id)
     {
-        /*$periodo = Periodo::find($id);
-        return view('datos-basicos.periodos.show')
+        /*$Estadocivil = Estadocivil::find($id);
+        return view('datos-basicos.estadocivil.show')
             ->with('location', 'datos-basicos')
-            ->with('periodo', $periodo);*/
+            ->with('Estadocivil', $Estadocivil);*/
     }
 
     /**
@@ -88,10 +88,10 @@ class PeriodoController extends Controller
      */
     public function edit($id)
     {
-        $periodo = Periodo::find($id);
-        return view('datos_basicos.periodos.edit')
+        $estado = Estadocivil::find($id);
+        return view('datos_basicos.estadocivil.edit')
             ->with('location', 'datos-basicos')
-            ->with('periodo', $periodo);
+            ->with('estado', $estado);
     }
 
     /**
@@ -103,34 +103,34 @@ class PeriodoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $periodo = Periodo::find($id);
-        $m = new Periodo($periodo->attributesToArray());
-        foreach ($periodo->attributesToArray() as $key => $value) {
+        $estado = Estadocivil::find($id);
+        $m = new Estadocivil($estado->attributesToArray());
+        foreach ($estado->attributesToArray() as $key => $value) {
             if (isset($request->$key)) {
-                $periodo->$key = strtoupper($request->$key);
+                $estado->$key = strtoupper($request->$key);
             }
         }
         $u = Auth::user();
-        $result = $periodo->save();
+        $result = $estado->save();
         if ($result) {
             $aud = new Auditoriadatosgenerales();
             $aud->usuario = "ID: " . $u->identificacion . ",  USUARIO: " . $u->nombres . " " . $u->apellidos;
             $aud->operacion = "ACTUALIZAR DATOS";
-            $str = "EDICION DE PERIODO. DATOS NUEVOS: ";
+            $str = "EDICION DE ESTADO CIVIL. DATOS NUEVOS: ";
             $str2 = " DATOS ANTIGUOS: ";
             foreach ($m->attributesToArray() as $key => $value) {
                 $str2 = $str2 . ", " . $key . ": " . $value;
             }
-            foreach ($periodo->attributesToArray() as $key => $value) {
+            foreach ($estado->attributesToArray() as $key => $value) {
                 $str = $str . ", " . $key . ": " . $value;
             }
             $aud->detalles = $str . " - " . $str2;
             $aud->save();
-            flash("El período <strong>" . $periodo->periodo . "</strong> fue modificado de forma exitosa!")->success();
-            return redirect()->route('periodo.index');
+            flash("El estado civil <strong>" . $estado->descripcion . "</strong> fue modificado de forma exitosa!")->success();
+            return redirect()->route('estadocivil.index');
         } else {
-            flash("El período <strong>" . $periodo->periodo . "</strong> no pudo ser modificado. Error: " . $result)->error();
-            return redirect()->route('periodo.index');
+            flash("El estado civil <strong>" . $estado->descripcion . "</strong> no pudo ser modificado. Error: " . $result)->error();
+            return redirect()->route('estadocivil.index');
         }
     }
 
@@ -142,28 +142,28 @@ class PeriodoController extends Controller
      */
     public function destroy($id)
     {
-        $periodo = Periodo::find($id);
-        if (count($periodo->grupos) > 0) {
-            flash("El período <strong>" . $periodo->periodo . "</strong> no pudo ser eliminado porque tiene grupos o cursos asociados.")->warning();
-            return redirect()->route('periodo.index');
+        $estado = Estadocivil::find($id);
+        if (count($estado->personanaturals) > 0) {
+            flash("El estado civil <strong>" . $estado->descripcion  . "</strong> no pudo ser eliminado porque tiene personas asociadas.")->warning();
+            return redirect()->route('estadocivil.index');
         } else {
-            $result = $periodo->delete();
+            $result = $estado->delete();
             if ($result) {
                 $aud = new Auditoriadatosgenerales();
                 $u = Auth::user();
                 $aud->usuario = "ID: " . $u->identificacion . ",  USUARIO: " . $u->nombres . " " . $u->apellidos;
                 $aud->operacion = "ELIMINAR";
-                $str = "ELIMINACIÓN DE PERIODOS. DATOS ELIMINADOS: ";
-                foreach ($periodo->attributesToArray() as $key => $value) {
+                $str = "ELIMINACIÓN DE ESTADO CIVIL. DATOS ELIMINADOS: ";
+                foreach ($estado->attributesToArray() as $key => $value) {
                     $str = $str . ", " . $key . ": " . $value;
                 }
                 $aud->detalles = $str;
                 $aud->save();
-                flash("El período <strong>" . $periodo->periodo . "</strong> fue eliminado de forma exitosa!")->success();
-                return redirect()->route('periodo.index');
+                flash("El estado civil <strong>" . $estado->descripcion . "</strong> fue eliminado de forma exitosa!")->success();
+                return redirect()->route('estadocivil.index');
             } else {
-                flash("El período <strong>" . $periodo->periodo . "</strong> no pudo ser eliminado. Error: " . $result)->error();
-                return redirect()->route('periodo.index');
+                flash("El estado civil <strong>" . $estado->descripcion . "</strong> no pudo ser eliminado. Error: " . $result)->error();
+                return redirect()->route('estadocivil.index');
             }
         }
     }

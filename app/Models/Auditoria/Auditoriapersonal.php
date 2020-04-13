@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Models\Personal;
+namespace App\Models\Auditoria;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Directorgrupo extends Model
+class Auditoriapersonal extends Model
 {
     /**
      * The attributes that are mass assignable.

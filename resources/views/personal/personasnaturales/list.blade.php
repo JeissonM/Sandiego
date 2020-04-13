@@ -2,39 +2,42 @@
 
 @section('breadcrumb')
 <li><a href="{{ route('inicio') }}">Inicio</a></li>
-<li><a href="{{ route('menu.datos_basicos') }}">Datos Generales</a></li>
-<li class="active">Estado Civil</li>
+<li><a href="{{ route('menu.personal') }}">Personal</a></li>
+<li class="active">Personas Naturales</li>
 @endsection
 
 @section('content')
 <div class="row-one">
-    <h3 class="title1" style="color: #287094 !important;">Estados Civiles</h3>
+    <h3 class="title1" style="color: #ea4c89 !important;">Personas Naturales</h3>
     <div class="well">
-        <a href="{{route('estadocivil.create')}}" class="btn btn-primary"><i class="fa fa-plus"></i> Crear Nuevo</a>
+        <a href="{{route('personanatural.create')}}" class="btn btn-personal"><i class="fa fa-plus"></i> Crear Nuevo</a>
         <a class="btn btn-default" data-toggle="modal" data-target="#gridSystemModal"><i class="fa fa-question"></i> Ayuda</a>
     </div>
     <div class="panel-info widget-shadow">
         <div class="table-responsive">
             <table id="example1" class="table table-bordered table-striped table-hover">
                 <thead>
-                    <tr class="info">
-                        <th>ID</th>
-                        <th>ESTADO CIVIL</th>
-                        <th>CREADO</th>
-                        <th>MODIFICADO</th>
+                    <tr class="personal">
+                        <th>IDENTIFICACIÓN</th>
+                        <th>PERSONA</th>
+                        <th>DIRECCIÓN</th>
+                        <th>TELÉFONO</th>
+                        <th>CORREO</th>
                         <th>ACCIONES</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($estados as $m)
+                    @foreach($personas as $m)
                     <tr>
-                        <td>{{$m->id}}</td>
-                        <td>{{$m->descripcion}}</td>
-                        <td>{{$m->created_at}}</td>
-                        <td>{{$m->updated_at}}</td>
+                        <td>{{$m->tipodoc->abreviatura." - ".$m->numero_documento}}</td>
+                        <td>{{$m->primer_nombre." ".$m->segundo_nombre." ".$m->primer_apellido." ".$m->segundo_apellido}}</td>
+                        <td>{{$m->direccion}}</td>
+                        <td>{{$m->telefono." - ".$m->celular}}</td>
+                        <td>{{$m->mail}}</td>
                         <td>
-                            <a href="{{route('estadocivil.edit',$m->id)}}" data-toggle="tooltip" title="Editar Estado" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i></a>
-                            <a href="{{route('estadocivil.delete',$m->id)}}" data-toggle="tooltip" title="Eliminar Estado" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i></a>
+                            <a href="{{route('personanatural.edit',$m->id)}}" data-toggle="tooltip" title="Editar Persona" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i></a>
+                            <a href="{{route('personanatural.show',$m->id)}}" data-toggle="tooltip" title="Ver Persona" class="btn btn-success btn-xs"><i class="fa fa-eye"></i></a>
+                            <a href="{{route('personanatural.delete',$m->id)}}" data-toggle="tooltip" title="Eliminar Persona" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i></a>
                         </td>
                     </tr>
                     @endforeach
@@ -54,7 +57,7 @@
             <div class="modal-body">
                 <div class="row">
                     <div class="alert alert-default" role="alert" style="text-align: justify;">
-                        <p>Esta funcionalidad permite la gestión de los estados civiles para uso en personas naturales.</p>
+                        <p>Esta funcionalidad permite la gestión de las personas naturales (docentes, estudiantes, entes rectores, padres de familia, etc) de la institución.</p>
                     </div>
                 </div>
             </div>

@@ -3,7 +3,7 @@
 @section('breadcrumb')
 <li><a href="{{ route('inicio') }}">Inicio</a></li>
 <li><a href="{{ route('menu.datos_basicos') }}">Datos Generales</a></li>
-<li><a href="{{ route('estadocivil.index') }}">Estados Civiles</a></li>
+<li><a href="{{ route('grupo.index') }}">Grupos</a></li>
 <li class="active">Editar</li>
 @endsection
 
@@ -13,23 +13,51 @@
     @endcomponent
 </div>
 <div class="row-one">
-    <h3 class="title1" style="color: #287094 !important;">Editar Estado Civil</h3>
+    <h3 class="title1" style="color: #287094 !important;">Editar Grupo</h3>
     <div class="well">
-        <a href="{{route('estadocivil.index')}}" class="btn btn-primary"><i class="fa fa-reply-o"></i> Volver</a>
+        <a href="{{route('grupo.index')}}" class="btn btn-primary"><i class="fa fa-reply-o"></i> Volver</a>
         <a class="btn btn-default" data-toggle="modal" data-target="#gridSystemModal"><i class="fa fa-question"></i> Ayuda</a>
     </div>
     <div class="form-grids row widget-shadow" data-example-id="basic-forms">
         <div class="form-title">
-            <h4>Datos del Estado Civil</h4>
+            <h4>Datos del Grupo</h4>
         </div>
         <div class="form-body">
-            <form class="form" role='form' method="POST" action="{{route('estadocivil.update',$estado->id)}}">
+            <form class="form" role='form' method="POST" action="{{route('grupo.update',$grupo->id)}}">
                 @csrf
                 <input name="_method" type="hidden" value="PUT" />
                 <div class="form-group">
                     <div class="col-md-12">
-                        <label for="exampleInputEmail1">Descripción*</label>
-                        <input class="form-control" value="{{$estado->descripcion}}" type="text" required="required" name="descripcion">
+                        <label for="exampleInputEmail1">Nombre del Grupo*</label>
+                        <input class="form-control" value="{{$grupo->nombre}}" type="text" required="required" name="nombre">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-6">
+                        <label>Seleccione Período*</label>
+                        <select class="form-control select2" style="width: 100%;" required="required" name="periodo_id">
+                            <option value="0">-- Seleccione una opción --</option>
+                            @foreach($periodos as $key=>$value)
+                            @if($grupo->periodo_id==$key)
+                            <option selected value="{{$key}}">{{$value}}</option>
+                            @else
+                            <option value="{{$key}}">{{$value}}</option>
+                            @endif
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label>Seleccione Grado*</label>
+                        <select class="form-control select2" style="width: 100%;" required="required" name="grado_id">
+                            <option value="0">-- Seleccione una opción --</option>
+                            @foreach($grados as $key=>$value)
+                            @if($grupo->grado_id==$key)
+                            <option selected value="{{$key}}">{{$value}}</option>
+                            @else
+                            <option value="{{$key}}">{{$value}}</option>
+                            @endif
+                            @endforeach
+                        </select>
                     </div>
                 </div>
                 <div class="form-group">
@@ -52,7 +80,7 @@
             <div class="modal-body">
                 <div class="row">
                     <div class="alert alert-default" role="alert" style="text-align: justify;">
-                        <p>Edite los datos de los estados civiles, los estados civiles son usados por las personas naturales.</p>
+                        <p>Edite los datos de los Grupos.</p>
                     </div>
                 </div>
             </div>
