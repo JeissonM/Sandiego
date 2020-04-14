@@ -143,28 +143,28 @@ class TipopersonajController extends Controller
     public function destroy($id)
     {
         $tpj = Tipopersonaj::find($id);
-        /*if (count($tpj->grupos) > 0) {
-            flash("El Tipodoc <strong>" . $tpj->Tipodoc . "</strong> no pudo ser eliminado porque tiene grupos o cursos asociados.")->warning();
-            return redirect()->route('tipopersonaj.index');
-        } else {*/
-        $result = $tpj->delete();
-        if ($result) {
-            $aud = new Auditoriadatosgenerales();
-            $u = Auth::user();
-            $aud->usuario = "ID: " . $u->identificacion . ",  USUARIO: " . $u->nombres . " " . $u->apellidos;
-            $aud->operacion = "ELIMINAR";
-            $str = "ELIMINACIÓN DE TIPO DE PERSONA JURÍDICA. DATOS ELIMINADOS: ";
-            foreach ($tpj->attributesToArray() as $key => $value) {
-                $str = $str . ", " . $key . ": " . $value;
-            }
-            $aud->detalles = $str;
-            $aud->save();
-            flash("El tipo de persona jurídica <strong>" . $tpj->descripcion . "</strong> fue eliminado de forma exitosa!")->success();
+        if (count($tpj->entecontrols) > 0) {
+            flash("El tipo de persona jurídica <strong>" . $tpj->descripcion . "</strong> no pudo ser eliminado porque tiene datos asociados.")->warning();
             return redirect()->route('tipopersonaj.index');
         } else {
-            flash("El tipo de persona jurídica <strong>" . $tpj->descripcion . "</strong> no pudo ser eliminado. Error: " . $result)->error();
-            return redirect()->route('tipopersonaj.index');
+            $result = $tpj->delete();
+            if ($result) {
+                $aud = new Auditoriadatosgenerales();
+                $u = Auth::user();
+                $aud->usuario = "ID: " . $u->identificacion . ",  USUARIO: " . $u->nombres . " " . $u->apellidos;
+                $aud->operacion = "ELIMINAR";
+                $str = "ELIMINACIÓN DE TIPO DE PERSONA JURÍDICA. DATOS ELIMINADOS: ";
+                foreach ($tpj->attributesToArray() as $key => $value) {
+                    $str = $str . ", " . $key . ": " . $value;
+                }
+                $aud->detalles = $str;
+                $aud->save();
+                flash("El tipo de persona jurídica <strong>" . $tpj->descripcion . "</strong> fue eliminado de forma exitosa!")->success();
+                return redirect()->route('tipopersonaj.index');
+            } else {
+                flash("El tipo de persona jurídica <strong>" . $tpj->descripcion . "</strong> no pudo ser eliminado. Error: " . $result)->error();
+                return redirect()->route('tipopersonaj.index');
+            }
         }
-        //    }
     }
 }

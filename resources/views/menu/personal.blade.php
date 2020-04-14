@@ -19,17 +19,17 @@
         @endif
         @if(session()->exists('PAG_PERSONAL-PERSONA-JURIDICA'))
         <div class="col-md-4" style="padding: 10px;">
-            <a disabled class="btn btn-personal btn-raised btn-block btn-flat"> ENTES DE CONTROL</a>
+            <a href="{{route('entecontrol.index')}}" class="btn btn-personal btn-raised btn-block btn-flat"> ENTES DE CONTROL</a>
         </div>
         @endif
         @if(session()->exists('PAG_PERSONAL-DOCENTES'))
         <div class="col-md-4" style="padding: 10px;">
-            <a disabled class="btn btn-personal btn-raised btn-block btn-flat"> DOCENTES</a>
+            <a href="{{route('docente.index')}}" class="btn btn-personal btn-raised btn-block btn-flat"> DOCENTES</a>
         </div>
         @endif
         @if(session()->exists('PAG_PERSONAL-ESTUDIANTES'))
         <div class="col-md-4" style="padding: 10px;">
-            <a disabled class="btn btn-personal btn-raised btn-block btn-flat"> ESTUDIANTES</a>
+            <a href="{{route('estudiante.index')}}" class="btn btn-personal btn-raised btn-block btn-flat"> ESTUDIANTES</a>
         </div>
         @endif
         @if(session()->exists('PAG_PERSONAL-PADRES'))

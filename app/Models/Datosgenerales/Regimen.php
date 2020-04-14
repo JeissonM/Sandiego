@@ -2,6 +2,7 @@
 
 namespace App\Models\Datosgenerales;
 
+use App\Models\Personal\Entecontrol;
 use Illuminate\Database\Eloquent\Model;
 
 class Regimen extends Model
@@ -23,4 +24,9 @@ class Regimen extends Model
     protected $hidden = [
         //
     ];
+
+    public function entecontrols()
+    {
+        return $this->hasMany(Entecontrol::class);
+    }
 }

@@ -2,6 +2,9 @@
 
 namespace App\Models\Personal;
 
+use App\Models\Datosgenerales\Regimen;
+use App\Models\Datosgenerales\Tipodoc;
+use App\Models\Datosgenerales\Tipopersonaj;
 use Illuminate\Database\Eloquent\Model;
 
 class Entecontrol extends Model
@@ -12,7 +15,7 @@ class Entecontrol extends Model
      * @var array
      */
     protected $fillable = [
-        'id', 'usuario', 'operacion', 'detalles', 'created_at', 'updated_at'
+        'id', 'direccion', 'mail', 'celular', 'telefono', 'numero_documento', 'lugar_expedicion', 'fecha_expedicion', 'numeroresolucion', 'razonsocial', 'representantelegal', 'cargorepresentante', 'fax', 'tipopersonaj_id', 'tipodoc_id', 'regimen_id', 'created_at', 'updated_at'
     ];
 
     /**
@@ -23,4 +26,19 @@ class Entecontrol extends Model
     protected $hidden = [
         //
     ];
+
+    public function tipopersonaj()
+    {
+        return $this->belongsTo(Tipopersonaj::class);
+    }
+
+    public function tipodoc()
+    {
+        return $this->belongsTo(Tipodoc::class);
+    }
+
+    public function regimen()
+    {
+        return $this->belongsTo(Regimen::class);
+    }
 }

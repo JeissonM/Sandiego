@@ -2,6 +2,7 @@
 
 namespace App\Models\Datosgenerales;
 
+use App\Models\Personal\Entecontrol;
 use App\Models\Personal\Personanatural;
 use Illuminate\Database\Eloquent\Model;
 
@@ -28,5 +29,10 @@ class Tipodoc extends Model
     public function personanaturals()
     {
         return $this->hasMany(Personanatural::class);
+    }
+
+    public function entecontrols()
+    {
+        return $this->hasMany(Entecontrol::class);
     }
 }

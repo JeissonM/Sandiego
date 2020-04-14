@@ -143,8 +143,8 @@ class TipodocController extends Controller
     public function destroy($id)
     {
         $tipodoc = Tipodoc::find($id);
-        if (count($tipodoc->personanaturals) > 0) {
-            flash("El tipo de documento <strong>" . $tipodoc->descripcion . "</strong> no pudo ser eliminado porque tiene personas asociadas.")->warning();
+        if (count($tipodoc->personanaturals) > 0 || count($tipodoc->entecontrols) > 0) {
+            flash("El tipo de documento <strong>" . $tipodoc->descripcion . "</strong> no pudo ser eliminado porque tiene datos asociados.")->warning();
             return redirect()->route('tipodoc.index');
         } else {
             $result = $tipodoc->delete();

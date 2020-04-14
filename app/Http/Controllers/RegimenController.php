@@ -143,28 +143,28 @@ class RegimenController extends Controller
     public function destroy($id)
     {
         $regimen = Regimen::find($id);
-        /*if (count($Regimen->paginas) > 0 || count($Regimen->modulos) > 0 || count($Regimen->users) > 0) {
-            flash("El Grupo de usuario <strong>" . $Regimen->nombre . "</strong> no pudo ser eliminado porque tiene permisos o datos-basicos asociados.")->warning();
-            return redirect()->route('regimen.index');
-        } else {*/
-        $result = $regimen->delete();
-        if ($result) {
-            $aud = new Auditoriadatosgenerales();
-            $u = Auth::user();
-            $aud->usuario = "ID: " . $u->identificacion . ",  USUARIO: " . $u->nombres . " " . $u->apellidos;
-            $aud->operacion = "ELIMINAR";
-            $str = "ELIMINACIÓN DE REGIMEN. DATOS ELIMINADOS: ";
-            foreach ($regimen->attributesToArray() as $key => $value) {
-                $str = $str . ", " . $key . ": " . $value;
-            }
-            $aud->detalles = $str;
-            $aud->save();
-            flash("El regimen <strong>" . $regimen->descripcion . "</strong> fue eliminado de forma exitosa!")->success();
+        if (count($regimen->entecontrols) > 0) {
+            flash("El régimen <strong>" . $regimen->descripcion . "</strong> no pudo ser eliminado porque tiene datos asociados.")->warning();
             return redirect()->route('regimen.index');
         } else {
-            flash("El regimen <strong>" . $regimen->descripcion . "</strong> no pudo ser eliminado. Error: " . $result)->error();
-            return redirect()->route('regimen.index');
+            $result = $regimen->delete();
+            if ($result) {
+                $aud = new Auditoriadatosgenerales();
+                $u = Auth::user();
+                $aud->usuario = "ID: " . $u->identificacion . ",  USUARIO: " . $u->nombres . " " . $u->apellidos;
+                $aud->operacion = "ELIMINAR";
+                $str = "ELIMINACIÓN DE REGIMEN. DATOS ELIMINADOS: ";
+                foreach ($regimen->attributesToArray() as $key => $value) {
+                    $str = $str . ", " . $key . ": " . $value;
+                }
+                $aud->detalles = $str;
+                $aud->save();
+                flash("El regimen <strong>" . $regimen->descripcion . "</strong> fue eliminado de forma exitosa!")->success();
+                return redirect()->route('regimen.index');
+            } else {
+                flash("El regimen <strong>" . $regimen->descripcion . "</strong> no pudo ser eliminado. Error: " . $result)->error();
+                return redirect()->route('regimen.index');
+            }
         }
-        //}
     }
 }

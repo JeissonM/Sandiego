@@ -71,7 +71,7 @@
                     <ul class="nav" id="side-menu">
                         @if(session()->exists('MOD_INICIO'))
                         @if($location=='home')
-                        <li class="active"><a href="{{route('inicio')}}"><i class="fa fa-home nav_icon"></i> <span>Inicio</span></a>
+                        <li class="active"><a class="active" href="{{route('inicio')}}"><i class="fa fa-home nav_icon"></i> <span>Inicio</span></a>
                         </li>
                         @else
                         <li><a href="{{route('inicio')}}"><i class="fa fa-home nav_icon"></i> <span>Inicio</span></a></li>
@@ -79,7 +79,7 @@
                         @endif
                         @if(session()->exists('MOD_USUARIOS'))
                         @if($location=='usuarios')
-                        <li class="active"><a href="{{route('menu.usuarios')}}"><i class="fa fa-users nav_icon"></i> <span>Usuarios</span></a>
+                        <li class="active"><a class="active" href="{{route('menu.usuarios')}}"><i class="fa fa-users nav_icon"></i> <span>Usuarios</span></a>
                         </li>
                         @else
                         <li><a href="{{route('menu.usuarios')}}"><i class="fa fa-users nav_icon"></i> <span>Usuarios</span></a></li>
@@ -87,7 +87,7 @@
                         @endif
                         @if(session()->exists('MOD_DATOS-BASICOS'))
                         @if($location=='datos-basicos')
-                        <li class="active"><a href="{{route('menu.datos_basicos')}}"><i class="fa fa-file nav_icon"></i> <span>Datos Generales</span></a>
+                        <li class="active"><a class="active" href="{{route('menu.datos_basicos')}}"><i class="fa fa-file nav_icon"></i> <span>Datos Generales</span></a>
                         </li>
                         @else
                         <li><a href="{{route('menu.datos_basicos')}}"><i class="fa fa-file nav_icon"></i> <span>Datos Generales</span></a></li>
@@ -95,7 +95,7 @@
                         @endif
                         @if(session()->exists('MOD_PERSONAL'))
                         @if($location=='personal')
-                        <li class="active"><a href="{{route('menu.personal')}}"><i class="fa fa-user nav_icon"></i> <span>Personal de la Institución</span></a>
+                        <li class="active"><a class="active" href="{{route('menu.personal')}}"><i class="fa fa-user nav_icon"></i> <span>Personal de la Institución</span></a>
                         </li>
                         @else
                         <li><a href="{{route('menu.personal')}}"><i class="fa fa-user nav_icon"></i> <span>Personal de la Institución</span></a></li>

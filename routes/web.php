@@ -81,7 +81,13 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'personal'], function () {
     //PERSONAS NATURALES
     Route::resource('personanatural', 'PersonanaturalController');
     Route::get('personanatural/{id}/delete', 'PersonanaturalController@destroy')->name('personanatural.delete');
-    //GRADOS
-    Route::resource('grado', 'GradoController');
-    Route::get('grado/{id}/delete', 'GradoController@destroy')->name('grado.delete');
+    //ENTES DE CONTROL
+    Route::resource('entecontrol', 'EntecontrolController');
+    Route::get('entecontrol/{id}/delete', 'EntecontrolController@destroy')->name('entecontrol.delete');
+    //DOCENTES
+    Route::resource('docente', 'DocenteController');
+    Route::get('docente/{id}/delete', 'DocenteController@destroy')->name('docente.delete');
+    //ESTUDIANTES
+    Route::resource('estudiante', 'EstudianteController');
+    Route::get('estudiante/{id}/delete', 'EstudianteController@destroy')->name('estudiante.delete');
 });

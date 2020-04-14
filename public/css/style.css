@@ -84,7 +84,7 @@ button#showLeftPush {
 	outline:none;
 }
 button#showLeftPush:hover {
-    color: #35f177;
+    color: #30c37f;
 }
 /*--push-menu-css--*/
 .cbp-spmenu {
@@ -95,7 +95,7 @@ button#showLeftPush:hover {
     height: 100%;
     top: 76px;
     z-index: 1000;
-    background-color:#2a8a62;
+    background-color:#30c37f;
 	padding: 2em 0;
 }
 .cbp-spmenu-left {
@@ -141,9 +141,12 @@ button#showLeftPush:hover {
 
 .nav > li > a:hover, .nav > li > a:focus {
     text-decoration: none;
-    background-color: transparent;
-    color: #35f177;
+    background-color: #2a8a62;
+    color: #fff;
+    transition: all 1s ease !important;
+    transform:translate3d(12px, 50%, 3em);
 }
+
 .sidebar .arrow {
     float: right;
 }
@@ -190,8 +193,8 @@ span.nav-badge-btm {
     padding: 0em 1em;
 }
 .dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus {
-    background: none;
-    color: #35f177;
+    color: #fff;
+    background-color: #2a8a62;
 }
 .chart-nav span.nav-badge-btm {
 	right: 5%;
@@ -431,10 +434,11 @@ ul.dropdown-menu li {
 	margin-left:0;
 }
 .sidebar .nav-second-level li a.active ,.sidebar ul li a.active{
-    color: #35f177;
+    color: #fff;
+    background-color: #2a8a62;
 }
 li.active a i, .act a i {
-    color: #35f177;
+    color: #fff;
 }
 .custom-nav > li.act > a, .custom-nav > li.act > a:hover, .custom-nav > li.act > a:focus {
     background-color: #353f4f;

@@ -35,4 +35,9 @@ class Personanatural extends Model
     {
         return $this->belongsTo(Estadocivil::class);
     }
+
+    public function docente()
+    {
+        return $this->hasOne(Docente::class);
+    }
 }

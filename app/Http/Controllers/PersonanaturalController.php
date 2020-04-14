@@ -163,28 +163,28 @@ class PersonanaturalController extends Controller
     public function destroy($id)
     {
         $persona = Personanatural::find($id);
-        /*if (count($persona->paginas) > 0 || count($persona->modulos) > 0 || count($persona->users) > 0) {
-            flash("El Grupo de usuario <strong>" . $persona->nombre . "</strong> no pudo ser eliminado porque tiene permisos o datos-basicos asociados.")->warning();
-            return redirect()->route('personanatural.index');
-        } else {*/
-        $result = $persona->delete();
-        if ($result) {
-            $aud = new Auditoriapersonal();
-            $u = Auth::user();
-            $aud->usuario = "ID: " . $u->identificacion . ",  USUARIO: " . $u->nombres . " " . $u->apellidos;
-            $aud->operacion = "ELIMINAR";
-            $str = "ELIMINACIÓN DE PERSONA NATURAL. DATOS ELIMINADOS: ";
-            foreach ($persona->attributesToArray() as $key => $value) {
-                $str = $str . ", " . $key . ": " . $value;
-            }
-            $aud->detalles = $str;
-            $aud->save();
-            flash("La persona <strong>" . $persona->primer_nombre . "</strong> fue eliminado de forma exitosa!")->success();
+        if ($persona->docente != null) {
+            flash("La persona <strong>" . $persona->primer_nombre . "</strong> no pudo ser eliminado porque tiene datos asociados.")->warning();
             return redirect()->route('personanatural.index');
         } else {
-            flash("La persona <strong>" . $persona->primer_nombre . "</strong> no pudo ser eliminado. Error: " . $result)->error();
-            return redirect()->route('personanatural.index');
+            $result = $persona->delete();
+            if ($result) {
+                $aud = new Auditoriapersonal();
+                $u = Auth::user();
+                $aud->usuario = "ID: " . $u->identificacion . ",  USUARIO: " . $u->nombres . " " . $u->apellidos;
+                $aud->operacion = "ELIMINAR";
+                $str = "ELIMINACIÓN DE PERSONA NATURAL. DATOS ELIMINADOS: ";
+                foreach ($persona->attributesToArray() as $key => $value) {
+                    $str = $str . ", " . $key . ": " . $value;
+                }
+                $aud->detalles = $str;
+                $aud->save();
+                flash("La persona <strong>" . $persona->primer_nombre . "</strong> fue eliminado de forma exitosa!")->success();
+                return redirect()->route('personanatural.index');
+            } else {
+                flash("La persona <strong>" . $persona->primer_nombre . "</strong> no pudo ser eliminado. Error: " . $result)->error();
+                return redirect()->route('personanatural.index');
+            }
         }
-        //}
     }
 }
