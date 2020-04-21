@@ -34,22 +34,22 @@
         @endif
         @if(session()->exists('PAG_PERSONAL-PADRES'))
         <div class="col-md-4" style="padding: 10px;">
-            <a disabled class="btn btn-personal btn-raised btn-block btn-flat"> PADRES DE FAMILIA (ACUDIENTES)</a>
+            <a href="{{route('padrefamilia.index')}}" class="btn btn-personal btn-raised btn-block btn-flat"> PADRES DE FAMILIA (ACUDIENTES)</a>
         </div>
         @endif
         @if(session()->exists('PAG_PERSONAL-DIRECTOR-GRUPO'))
         <div class="col-md-4" style="padding: 10px;">
-            <a disabled class="btn btn-personal btn-raised btn-block btn-flat"> DIRECTOR DE GRUPO</a>
+            <a href="{{route('directorgrupo.index')}}" class="btn btn-personal btn-raised btn-block btn-flat"> DIRECTOR DE GRUPO</a>
         </div>
         @endif
         @if(session()->exists('PAG_PERSONAL-COORDINADORES'))
         <div class="col-md-4" style="padding: 10px;">
-            <a disabled class="btn btn-personal btn-raised btn-block btn-flat"> COORDINADORES</a>
+            <a href="{{route('coordinador.index')}}" class="btn btn-personal btn-raised btn-block btn-flat"> COORDINADORES</a>
         </div>
         @endif
         @if(session()->exists('PAG_PERSONAL-PSICOORIENTADOR'))
         <div class="col-md-4" style="padding: 10px;">
-            <a disabled class="btn btn-personal btn-raised btn-block btn-flat"> ORIENTADORES ESCOLARES</a>
+            <a href="{{route('orientador.index')}}" class="btn btn-personal btn-raised btn-block btn-flat"> ORIENTADORES ESCOLARES</a>
         </div>
         @endif
         <div class="clearfix"> </div>

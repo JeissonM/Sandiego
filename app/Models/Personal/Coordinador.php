@@ -12,7 +12,7 @@ class Coordinador extends Model
      * @var array
      */
     protected $fillable = [
-        'id', 'usuario', 'operacion', 'detalles', 'created_at', 'updated_at'
+        'id', 'area', 'personanatural_id', 'created_at', 'updated_at'
     ];
 
     /**
@@ -23,4 +23,9 @@ class Coordinador extends Model
     protected $hidden = [
         //
     ];
+
+    public function personanatural()
+    {
+        return $this->belongsTo(Personanatural::class);
+    }
 }

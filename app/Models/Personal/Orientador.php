@@ -12,7 +12,7 @@ class Orientador extends Model
      * @var array
      */
     protected $fillable = [
-        'id', 'usuario', 'operacion', 'detalles', 'created_at', 'updated_at'
+        'id', 'personanatural_id', 'created_at', 'updated_at'
     ];
 
     /**
@@ -23,4 +23,9 @@ class Orientador extends Model
     protected $hidden = [
         //
     ];
+
+    public function personanatural()
+    {
+        return $this->belongsTo(Personanatural::class);
+    }
 }

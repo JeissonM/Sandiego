@@ -2,10 +2,9 @@
 
 namespace App\Models\Personal;
 
-use App\Models\Datosgenerales\Grupo;
 use Illuminate\Database\Eloquent\Model;
 
-class Directorgrupo extends Model
+class Padreestudiante extends Model
 {
     /**
      * The attributes that are mass assignable.
@@ -13,7 +12,7 @@ class Directorgrupo extends Model
      * @var array
      */
     protected $fillable = [
-        'id', 'docente_id', 'grupo_id', 'created_at', 'updated_at'
+        'id', 'padrefamilia_id', 'estudiante_id', 'created_at', 'updated_at'
     ];
 
     /**
@@ -25,13 +24,13 @@ class Directorgrupo extends Model
         //
     ];
 
-    public function docente()
+    public function estudiante()
     {
-        return $this->belongsTo(Docente::class);
+        return $this->belongsTo(Estudiante::class);
     }
 
-    public function grupo()
+    public function padrefamilia()
     {
-        return $this->belongsTo(Grupo::class);
+        return $this->belongsTo(Padrefamilia::class);
     }
 }

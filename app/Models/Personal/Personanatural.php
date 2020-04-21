@@ -40,4 +40,24 @@ class Personanatural extends Model
     {
         return $this->hasOne(Docente::class);
     }
+
+    public function estudiante()
+    {
+        return $this->hasOne(Estudiante::class);
+    }
+
+    public function padrefamilia()
+    {
+        return $this->hasOne(Padrefamilia::class);
+    }
+
+    public function coordinador()
+    {
+        return $this->hasOne(Coordinador::class);
+    }
+
+    public function orientador()
+    {
+        return $this->hasOne(Orientador::class);
+    }
 }

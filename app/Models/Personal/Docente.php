@@ -28,4 +28,9 @@ class Docente extends Model
     {
         return $this->belongsTo(Personanatural::class);
     }
+
+    public function directorgrupos()
+    {
+        return $this->hasMany(Directorgrupo::class);
+    }
 }

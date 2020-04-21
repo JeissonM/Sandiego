@@ -2,6 +2,7 @@
 
 namespace App\Models\Datosgenerales;
 
+use App\Models\Personal\Estudiante;
 use Illuminate\Database\Eloquent\Model;
 
 class Grado extends Model
@@ -27,5 +28,10 @@ class Grado extends Model
     public function grupos()
     {
         return $this->hasMany(Grupo::class);
+    }
+
+    public function estudiantes()
+    {
+        return $this->hasMany(Estudiante::class);
     }
 }

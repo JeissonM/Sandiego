@@ -2,6 +2,7 @@
 
 namespace App\Models\Personal;
 
+use App\Models\Datosgenerales\Grado;
 use Illuminate\Database\Eloquent\Model;
 
 class Estudiante extends Model
@@ -12,7 +13,7 @@ class Estudiante extends Model
      * @var array
      */
     protected $fillable = [
-        'id', 'usuario', 'operacion', 'detalles', 'created_at', 'updated_at'
+        'id', 'desplazado', 'vive_con', 'eps', 'grado_id', 'personanatural_id', 'padrefamilia_id', 'created_at', 'updated_at'
     ];
 
     /**
@@ -23,4 +24,24 @@ class Estudiante extends Model
     protected $hidden = [
         //
     ];
+
+    public function grado()
+    {
+        return $this->belongsTo(Grado::class);
+    }
+
+    public function personanatural()
+    {
+        return $this->belongsTo(Personanatural::class);
+    }
+
+    public function padrefamilia()
+    {
+        return $this->belongsTo(Padrefamilia::class);
+    }
+
+    public function padreestudiantes()
+    {
+        return $this->hasMany(Padreestudiante::class);
+    }
 }

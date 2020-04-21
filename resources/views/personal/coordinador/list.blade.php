@@ -3,14 +3,14 @@
 @section('breadcrumb')
 <li><a href="{{ route('inicio') }}">Inicio</a></li>
 <li><a href="{{ route('menu.personal') }}">Personal</a></li>
-<li class="active">Estudiantes</li>
+<li class="active">Coordinadores</li>
 @endsection
 
 @section('content')
 <div class="row-one">
-    <h3 class="title1" style="color: #ea4c89 !important;">Estudiantes</h3>
+    <h3 class="title1" style="color: #ea4c89 !important;">Coordinadores</h3>
     <div class="well">
-        <a href="{{route('estudiante.create')}}" class="btn btn-personal"><i class="fa fa-plus"></i> Crear Nuevo</a>
+        <a href="{{route('coordinador.create')}}" class="btn btn-personal"><i class="fa fa-plus"></i> Crear Nuevo</a>
         <a class="btn btn-default" data-toggle="modal" data-target="#gridSystemModal"><i class="fa fa-question"></i> Ayuda</a>
     </div>
     <div class="panel-info widget-shadow">
@@ -19,39 +19,19 @@
                 <thead>
                     <tr class="personal">
                         <th>DOCUMENTO</th>
-                        <th>ESTUDIANTE</th>
-                        <th>GRADO</th>
-                        <th>DESPLAZADO</th>
-                        <th>VIVE CON</th>
-                        <th>EPS</th>
-                        <th>ACUDIENTE Y PADRES</th>
+                        <th>COORDINADOR</th>
+                        <th>ÁREA</th>
                         <th>ACCIONES</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($estudiantes as $m)
+                    @foreach($coordinadores as $m)
                     <tr>
                         <td>{{$m->personanatural->tipodoc->abreviatura." - ".$m->personanatural->numero_documento}}</td>
                         <td>{{$m->personanatural->primer_nombre." ".$m->personanatural->segundo_nombre." ".$m->personanatural->primer_apellido." ".$m->personanatural->segundo_apellido}}</td>
-                        <td>{{$m->grado->grado}}</td>
-                        <td>{{$m->desplazado}}</td>
-                        <td>{{$m->vive_con}}</td>
-                        <td>{{$m->eps}}</td>
+                        <td>{{$m->area}}</td>
                         <td>
-                            ACUDIENTE: @if($m->padrefamilia!=null){{$m->padrefamilia->personanatural->primer_nombre." ".$m->padrefamilia->personanatural->segundo_nombre." ".$m->padrefamilia->personanatural->primer_apellido." ".$m->padrefamilia->personanatural->segundo_apellido}}@else ---- @endif
-                            <br>
-                            PADRES:
-                            @if(count($m->padreestudiantes)>0)
-                            @foreach($m->padreestudiantes as $p)
-                            {{$p->padrefamilia->personanatural->primer_nombre." ".$p->padrefamilia->personanatural->segundo_nombre." ".$p->padrefamilia->personanatural->primer_apellido." ".$p->padrefamilia->personanatural->segundo_apellido}}<br>
-                            @endforeach
-                            @else
-                            -------
-                            @endif
-                        </td>
-                        <td>
-                            <a href="{{route('estudiante.edit',$m->id)}}" data-toggle="tooltip" title="Editar Estudiante" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i></a>
-                            <a href="{{route('estudiante.delete',$m->id)}}" data-toggle="tooltip" title="Eliminar Estudiante" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i></a>
+                            <a href="{{route('coordinador.delete',$m->id)}}" data-toggle="tooltip" title="Eliminar Coordinador" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i></a>
                         </td>
                     </tr>
                     @endforeach
@@ -71,7 +51,7 @@
             <div class="modal-body">
                 <div class="row">
                     <div class="alert alert-default" role="alert" style="text-align: justify;">
-                        <p>Esta funcionalidad permite la gestión de los Estudiantes de la institución, la edición propia de los estudiantes se realiza en esta funcionalidad, la edición de los demás datos se realiza en <b>persona natural</b>, tenga en cuenta que al eliminar un estudiante, no será quitada la información de persona natural.</p>
+                        <p>Esta funcionalidad permite la gestión de los Coordinadores de la institución, la edición de los datos se realiza en <b>persona natural</b>, tenga en cuenta que al eliminar un coordinador, no será quitada la información de persona natural.</p>
                     </div>
                 </div>
             </div>

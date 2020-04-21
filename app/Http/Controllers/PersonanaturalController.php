@@ -163,7 +163,7 @@ class PersonanaturalController extends Controller
     public function destroy($id)
     {
         $persona = Personanatural::find($id);
-        if ($persona->docente != null) {
+        if ($persona->docente != null || $persona->estudiante != null || $persona->padrefamilia != null) {
             flash("La persona <strong>" . $persona->primer_nombre . "</strong> no pudo ser eliminado porque tiene datos asociados.")->warning();
             return redirect()->route('personanatural.index');
         } else {

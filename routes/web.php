@@ -65,6 +65,7 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'datos_basicos'], function (
     //GRUPOS
     Route::resource('grupo', 'GrupoController');
     Route::get('grupo/{id}/delete', 'GrupoController@destroy')->name('grupo.delete');
+    Route::get('grupo/{grado}/{periodo}/grupos', 'GrupoController@grupos')->name('grupo.grupos');
     //REGIMEN
     Route::resource('regimen', 'RegimenController');
     Route::get('regimen/{id}/delete', 'RegimenController@destroy')->name('regimen.delete');
@@ -90,4 +91,21 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'personal'], function () {
     //ESTUDIANTES
     Route::resource('estudiante', 'EstudianteController');
     Route::get('estudiante/{id}/delete', 'EstudianteController@destroy')->name('estudiante.delete');
+    //PADRE FAMILIA
+    Route::resource('padrefamilia', 'PadrefamiliaController');
+    Route::get('padrefamilia/{id}/delete', 'PadrefamiliaController@destroy')->name('padrefamilia.delete');
+    Route::get('padrefamilia/{estudiante}/delete/{padre}/quitar', 'PadrefamiliaController@destroyestudiante')->name('padrefamilia.deleteestudiante');
+    Route::get('padrefamilia/{estudiante}/estudiantes/{padre}/agregar', 'PadrefamiliaController@addestudiante')->name('padrefamilia.addestudiante');
+    Route::get('padrefamilia/{padre}/hijos', 'PadrefamiliaController@hijos')->name('padrefamilia.hijos');
+    Route::get('padrefamilia/{padre}/hijos/{hijo}/remove', 'PadrefamiliaController@removehijo')->name('padrefamilia.removehijo');
+    Route::get('padrefamilia/{padre}/hijos/{hijo}/add', 'PadrefamiliaController@addhijo')->name('padrefamilia.addhijo');
+    //DOCENTES DIRECTORES DE GRUPO
+    Route::resource('directorgrupo', 'DirectorgrupoController');
+    Route::get('directorgrupo/{id}/delete', 'DirectorgrupoController@destroy')->name('directorgrupo.delete');
+    //COORDINADORES
+    Route::resource('coordinador', 'CoordinadorController');
+    Route::get('coordinador/{id}/delete', 'CoordinadorController@destroy')->name('coordinador.delete');
+    //ORIENTADORES
+    Route::resource('orientador', 'OrientadorController');
+    Route::get('orientador/{id}/delete', 'OrientadorController@destroy')->name('orientador.delete');
 });

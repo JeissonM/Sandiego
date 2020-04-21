@@ -10,6 +10,8 @@ use App\Models\Datosgenerales\Periodo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
+use function GuzzleHttp\json_decode;
+
 class GrupoController extends Controller
 {
     /**
@@ -176,5 +178,16 @@ class GrupoController extends Controller
             return redirect()->route('grupo.index');
         }
         //}
+    }
+
+    //grupos para un grado y periodo
+    public function grupos($g, $p)
+    {
+        $grupos = Grupo::where([['periodo_id', $p], ['grado_id', $g]])->get();
+        if (count($grupos) > 0) {
+            return json_encode($grupos);
+        } else {
+            return "NO";
+        }
     }
 }

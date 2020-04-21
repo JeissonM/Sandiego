@@ -12,7 +12,7 @@ class Padrefamilia extends Model
      * @var array
      */
     protected $fillable = [
-        'id', 'usuario', 'operacion', 'detalles', 'created_at', 'updated_at'
+        'id', 'acudiente', 'personanatural_id', 'created_at', 'updated_at'
     ];
 
     /**
@@ -23,4 +23,19 @@ class Padrefamilia extends Model
     protected $hidden = [
         //
     ];
+
+    public function estudiantes()
+    {
+        return $this->hasMany(Estudiante::class);
+    }
+
+    public function personanatural()
+    {
+        return $this->belongsTo(Personanatural::class);
+    }
+
+    public function padreestudiantes()
+    {
+        return $this->hasMany(Padreestudiante::class);
+    }
 }

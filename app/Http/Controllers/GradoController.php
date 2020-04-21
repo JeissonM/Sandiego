@@ -143,7 +143,7 @@ class GradoController extends Controller
     public function destroy($id)
     {
         $grado = Grado::find($id);
-        if (count($grado->grupos) > 0) {
+        if (count($grado->grupos) > 0 || count($grado->estudiantes) > 0) {
             flash("El grado <strong>" . $grado->grado . "</strong> no pudo ser eliminado porque tiene grupos o cursos asociados.")->warning();
             return redirect()->route('grado.index');
         } else {

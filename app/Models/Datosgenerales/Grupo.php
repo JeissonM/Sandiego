@@ -24,6 +24,11 @@ class Grupo extends Model
         //
     ];
 
+    public function directorgrupos()
+    {
+        return $this->hasMany(Directorgrupo::class);
+    }
+
     public function periodo()
     {
         return $this->belongsTo(Periodo::class);
