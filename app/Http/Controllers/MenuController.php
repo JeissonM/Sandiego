@@ -23,10 +23,18 @@ class MenuController extends Controller
     }
 
     /**
-     * return the view for the manipulation of the general data
+     * return the view for the manipulation of the personal
      */
     public function personal()
     {
         return view('menu.personal')->with('location', 'personal');
+    }
+
+    /**
+     * return the view for the manipulation of the citas
+     */
+    public function citas()
+    {
+        return view('menu.citas')->with('location', 'citas');
     }
 }

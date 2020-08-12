@@ -55,17 +55,19 @@
                 <h4 class="counttype text-light">De La Institución</h4>
             </div>
         </div>
-        @endif        
-        <!---
-        <div class="wid-social vimeo">
+        @endif
+        @if(session()->exists('MOD_CITAS'))
+        <div class="wid-social vimeo" style="cursor: pointer;" onclick="ir(this.id)" id="citas">
             <div class="social-icon">
-                <i class="fa fa-vimeo-square text-light icon-xlg"> </i>
+                <i class="fa fa-bookmark text-light icon-xlg"> </i>
             </div>
             <div class="social-info">
-                <h3 class="number_counter bold count text-light start_timer counted">2.1 m</h3>
-                <h4 class="counttype text-light">Contacts</h4>
+                <h3 class="number_counter bold count text-light start_timer counted">Citas</h3>
+                <h4 class="counttype text-light">Gestión</h4>
             </div>
         </div>
+        @endif
+        <!--
         <div class="wid-social xing">
             <div class="social-icon">
                 <i class="fa fa-xing text-light icon-xlg "></i>
@@ -137,6 +139,9 @@
                 break;
             case 'personal':
                 location.href = url + "menu/personal";
+                break;
+            case 'citas':
+                location.href = url + "menu/citas";
                 break;
             default:
                 break;

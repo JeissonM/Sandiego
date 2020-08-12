@@ -2,10 +2,9 @@
 
 namespace App\Models\Datosgenerales;
 
-use App\Models\Citas\Disponibilidad;
 use Illuminate\Database\Eloquent\Model;
 
-class Periodo extends Model
+class Tipocaso extends Model
 {
     /**
      * The attributes that are mass assignable.
@@ -13,7 +12,7 @@ class Periodo extends Model
      * @var array
      */
     protected $fillable = [
-        'id', 'periodo', 'fecha_inicio', 'fecha_fin', 'created_at', 'updated_at'
+        'id', 'descripcion', 'nivel', 'created_at', 'updated_at'
     ];
 
     /**
@@ -24,14 +23,4 @@ class Periodo extends Model
     protected $hidden = [
         //
     ];
-
-    public function grupos()
-    {
-        return $this->hasMany(Grupo::class);
-    }
-
-    public function disponibilidads()
-    {
-        return $this->hasMany(Disponibilidad::class);
-    }
 }

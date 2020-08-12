@@ -18,15 +18,21 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
+//RUTAS PUBLICAS
+//REGISTRO DE PERSONAL
+Route::get('/registro/publico/{source}', 'RegistropublicoController@create')->name('registropublico.crear');
+Route::post('/registro/publico/registro/guardar', 'RegistropublicoController@store')->name('registropublico.store');
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Auth::routes();
 
 //GRUPO DE RUTAS PARA LOS MENUS
 Route::group(['middleware' => ['auth'], 'prefix' => 'menu'], function () {
     Route::get('usuarios', 'MenuController@usuarios')->name('menu.usuarios');
     Route::get('datos_basicos', 'MenuController@datos_basicos')->name('menu.datos_basicos');
     Route::get('personal', 'MenuController@personal')->name('menu.personal');
+    Route::get('citas', 'MenuController@citas')->name('menu.citas');
 });
 
 
@@ -75,6 +81,9 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'datos_basicos'], function (
     //TIPO PERSONA JURIDICA
     Route::resource('tipopersonaj', 'TipopersonajController');
     Route::get('tipopersonaj/{id}/delete', 'TipopersonajController@destroy')->name('tipopersonaj.delete');
+    //TIPO DE CASOS
+    Route::resource('tipocaso', 'TipocasoController');
+    Route::get('tipocaso/{id}/delete', 'TipocasoController@destroy')->name('tipocaso.delete');
 });
 
 //GRUPO DE RUTAS PARA LA GESTIÓN DEL PERSONAL
@@ -108,4 +117,12 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'personal'], function () {
     //ORIENTADORES
     Route::resource('orientador', 'OrientadorController');
     Route::get('orientador/{id}/delete', 'OrientadorController@destroy')->name('orientador.delete');
+});
+
+//GRUPO DE RUTAS PARA LA GESTIÓN DE CITAS
+Route::group(['middleware' => ['auth'], 'prefix' => 'citas'], function () {
+    //DISPONIBILIDAD DE CITAS
+    Route::resource('disponibilidad', 'DisponibilidadController');
+    Route::get('disponibilidad/{id}/delete', 'DisponibilidadController@destroy')->name('disponibilidad.delete');
+    Route::get('disponibilidad/{id}/crear', 'DisponibilidadController@create')->name('disponibilidad.crear');
 });

@@ -70,7 +70,7 @@
                     </tr>
                     <tr class="read">
                         <td class="contact"><b>Estado Civil</b></td>
-                        <td class="subject">{{$persona->estadocivil->descripcion}}</td>
+                        <td class="subject">@if($persona->estadocivil!=null){{$persona->estadocivil->descripcion}}@else ---- @endif</td>
                     </tr>
                     <tr class="read">
                         <td class="contact"><b>Libreta Militar</b></td>

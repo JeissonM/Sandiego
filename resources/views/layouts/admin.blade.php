@@ -101,6 +101,14 @@
                         <li><a href="{{route('menu.personal')}}"><i class="fa fa-user nav_icon"></i> <span>Personal de la Institución</span></a></li>
                         @endif
                         @endif
+                        @if(session()->exists('MOD_CITAS'))
+                        @if($location=='citas')
+                        <li class="active"><a class="active" href="{{route('menu.citas')}}"><i class="fa fa-bookmark nav_icon"></i> <span>Citas</span></a>
+                        </li>
+                        @else
+                        <li><a href="{{route('menu.citas')}}"><i class="fa fa-bookmark nav_icon"></i> <span>Citas</span></a></li>
+                        @endif
+                        @endif
                         <li>
                             <a href="{{ route('logout') }}" onclick="event.preventDefault();
                                                        document.getElementById('logout-form').submit();">
@@ -318,7 +326,7 @@
         <!-- main content start-->
         <div id="page-wrapper">
             <div class="main-page">
-                <ol class="breadcrumb">
+                <ol class="breadcrumb" style="margin-top: 60px;">
                     @yield('breadcrumb')
                 </ol>
                 @include('flash::message')

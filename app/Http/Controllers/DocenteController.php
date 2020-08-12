@@ -64,7 +64,7 @@ class DocenteController extends Controller
             $aud = new Auditoriapersonal();
             $aud->usuario = "ID: " . $u->identificacion . ",  USUARIO: " . $u->nombres . " " . $u->apellidos;
             $aud->operacion = "INSERTAR";
-            $str = "CREACIÓN DE docente. DATOS: ";
+            $str = "CREACIÓN DE DOCENTE. DATOS: ";
             foreach ($docente->attributesToArray() as $key => $value) {
                 $str = $str . ", " . $key . ": " . $value;
             }

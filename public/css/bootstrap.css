@@ -2413,6 +2413,30 @@ table th[class*="col-"] {
 .table-hover > tbody > tr.personal:hover > th {
   background-color: #fbe3ec;
 }
+.table > thead > tr > td.citas,
+.table > tbody > tr > td.citas,
+.table > tfoot > tr > td.citas,
+.table > thead > tr > th.citas,
+.table > tbody > tr > th.citas,
+.table > tfoot > tr > th.citas,
+.table > thead > tr.citas > td,
+.table > tbody > tr.citas > td,
+.table > tfoot > tr.citas > td,
+.table > thead > tr.citas > th,
+.table > tbody > tr.citas > th,
+.table > tfoot > tr.citas > th {
+  background-color: #16222152;
+}
+
+.table-hover > tbody > tr > td.citas:hover,
+.table-hover > tbody > tr > th.citas:hover,
+.table-hover > tbody > tr.citas:hover > td,
+.table-hover > tbody > tr:hover > .citas,
+.table-hover > tbody > tr.citas:hover > th {
+  background-color: #16222152;
+}
+
+
 .table > thead > tr > td.warning,
 .table > tbody > tr > td.warning,
 .table > tfoot > tr > td.warning,
@@ -3126,6 +3150,23 @@ fieldset[disabled] .btn-default.active {
   color: #fbe3ec;
   background-color:#c71a5d;
   border-color: #c71a5d;
+}
+
+.btn-citas{
+  color: #c0d4d2;
+  background-color: #162221;
+  border-color: #090e0e;
+}
+
+.btn-citas:hover, 
+.btn-citas:focus, 
+.btn-citas.focus, 
+.btn-citas:active, 
+.btn-citas.active, 
+.open > .dropdown-toggle.btn-citas{
+  color: #c1f5f0;
+  background-color: #09211f;
+  border-color: #000c0c;
 }
 
 .btn-primary:hover,
@@ -5010,6 +5051,12 @@ a.thumbnail.active {
   color: #fbe3ec;
   background-color: #ea4c89;
   border-color: #ea4c89;
+}
+
+.alert-citas {
+  color: #c0d4d2;
+  background-color: #162221;
+  border-color: #090e0e;
 }
 
 .alert-info hr {

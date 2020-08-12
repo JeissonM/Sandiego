@@ -3,7 +3,14 @@
 }
 #page-wrapper {
     padding:2em 2em 2em;
-    background-color: #F1F1F1;
+    background: url(../images/bg.jpg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    height: 100%;
+    width: 100% ;
+    text-align: center;
 }
 .navbar-top-links {
     margin-right: 0;

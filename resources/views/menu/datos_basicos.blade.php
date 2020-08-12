@@ -47,6 +47,11 @@
             <a href="{{route('tipopersonaj.index')}}" class="btn btn-primary btn-raised btn-block btn-flat"> TIPO DE PERSONA JURÍDICA</a>
         </div>
         @endif
+        @if(session()->exists('PAG_DATOS-GENERALES-TIPOS-DE-CASOS'))
+        <div class="col-md-4" style="padding: 10px;">
+            <a href="{{route('tipocaso.index')}}" class="btn btn-primary btn-raised btn-block btn-flat"> TIPOS DE CASOS</a>
+        </div>
+        @endif
         <div class="clearfix"> </div>
     </div>
 </div>
